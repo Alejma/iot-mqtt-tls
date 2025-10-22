@@ -73,7 +73,7 @@ Para usar GitHub Actions, configura los siguientes secrets en tu repositorio:
 - `COUNTRY`
 - `STATE` 
 - `CITY`
-- `MQTT_SERVER`
+- `MQTT_SERVER` (servidor MQTT)
 - `MQTT_PORT`
 - `MQTT_USER`
 - `MQTT_PASSWORD`
