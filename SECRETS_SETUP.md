@@ -34,8 +34,30 @@ cp .env.template .env
 Luego edita `.env` con tus valores reales.
 
 ### 2. Compilar con PlatformIO
+
+#### Opción A: Compilar con valores por defecto (recomendado para desarrollo)
 ```bash
 platformio run -e esp32dev
+```
+
+#### Opción B: Compilar con variables de entorno específicas
+```bash
+platformio run -e esp32dev \
+  -DCOUNTRY=colombia \
+  -DSTATE=valle \
+  -DCITY=tulua \
+  -DMQTT_SERVER=mqtt.usuario.freeddns.org \
+  -DMQTT_PORT=8883 \
+  -DMQTT_USER=alvaro \
+  -DMQTT_PASSWORD=supersecreto \
+  -DWIFI_SSID=wifi \
+  -DWIFI_PASSWORD=password \
+  -DROOT_CA="-----BEGIN CERTIFICATE-----..."
+```
+
+#### Opción C: Usar el script de Python (recomendado para CI/CD)
+```bash
+python scripts/build_with_env.py
 ```
 
 ## Configuración en GitHub Secrets
