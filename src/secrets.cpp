@@ -34,24 +34,45 @@
 
 /*********** Inicio de parametros configurables por el usuario *********/
 
-// Cambia estos valores por los de su red y servidor MQTT
+// Variables de entorno - se configuran en platformio.ini o .env
 // Los topicos deben tener la estructura: <país>/<estado>/<ciudad>/<usuario>/out
+#ifndef COUNTRY
 #define COUNTRY "colombia"                        ///< País donde se encuentra el dispositivo
+#endif
+#ifndef STATE
 #define STATE "valle"                             ///< Estado donde se encuentra el dispositivo
+#endif
+#ifndef CITY
 #define CITY "tulua"                              ///< Ciudad donde se encuentra el dispositivo
+#endif
+#ifndef MQTT_SERVER
 #define MQTT_SERVER "mqtt.alvarosalazar.freeddns.org"         ///< Servidor MQTT
+#endif
+#ifndef MQTT_PORT
 #define MQTT_PORT 8883                            ///< Puerto seguro (TLS)
+#endif
+#ifndef MQTT_USER
 #define MQTT_USER "alvaro"                       ///< Usuario MQTT no adninistrador 
+#endif
+#ifndef MQTT_PASSWORD
 #define MQTT_PASSWORD "supersecreto"                  ///< Contraseña del usuario MQTT
+#endif
 
 // Variables de configuración de la red WiFi
-// Cambia estos valores por los de su red WiFi
-#define SSID "VIRUS2"                     ///< Cambia por el nombre de tu red WiFi
-#define PASSWORD "a1b2c3d4"                       ///< Cambia por la contraseña de tu red WiFi
+#ifndef WIFI_SSID
+#define WIFI_SSID "univalle"                     ///< Cambia por el nombre de tu red WiFi
+#endif
+#ifndef WIFI_PASSWORD
+#define WIFI_PASSWORD "Univalle"                       ///< Cambia por la contraseña de tu red WiFi
+#endif
 
-// Cambia al certificado del broker: Certificado raíz de Let's Encrypt (ISRG Root X1) en formato PEM
-const char* root_ca = \
-"-----BEGIN CERTIFICATE-----\n" \
+// Alias para compatibilidad con el código existente
+#define SSID WIFI_SSID
+#define PASSWORD WIFI_PASSWORD
+
+// Certificado raíz - se configura como variable de entorno
+#ifndef ROOT_CA
+#define ROOT_CA "-----BEGIN CERTIFICATE-----\n" \
 "MIIFazCCA1OgAwIBAgIRAIIQz7DSQONZRGPgu2OCiwAwDQYJKoZIhvcNAQELBQAw\n" \
 "TzELMAkGA1UEBhMCVVMxKTAnBgNVBAoTIEludGVybmV0IFNlY3VyaXR5IFJlc2Vh\n" \
 "cmNoIEdyb3VwMRUwEwYDVQQDEwxJU1JHIFJvb3QgWDEwHhcNMTUwNjA0MTEwNDM4\n" \
@@ -81,7 +102,10 @@ const char* root_ca = \
 "4RgqsahDYVvTH9w7jXbyLeiNdd8XM2w9U/t7y0Ff/9yi0GE44Za4rF2LN9d11TPA\n" \
 "mRGunUHBcnWEvgJBQl9nJEiU0Zsnvgc/ubhPgXRR4Xq37Z0j4r7g1SgEEzwxA57d\n" \
 "emyPxgcYxn/eR44/KJ4EBs+lVDR3veyJm+kXQ99b21/+jh5Xos1AnX5iItreGCc=\n" \
-"-----END CERTIFICATE-----\n";
+"-----END CERTIFICATE-----"
+#endif
+
+const char* root_ca = ROOT_CA;
 
 /*********** Fin de parametros configurables por el usuario ***********/
 
