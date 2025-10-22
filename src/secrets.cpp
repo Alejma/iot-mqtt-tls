@@ -46,7 +46,7 @@
 #define CITY "tulua"                              ///< Ciudad donde se encuentra el dispositivo
 #endif
 #ifndef MQTT_SERVER
-#define MQTT_SERVER "mqtt.alvarosalazar.freeddns.org"         ///< Servidor MQTT
+#define MQTT_SERVER "mqtt.usuario.freeddns.org"         ///< Servidor MQTT
 #endif
 #ifndef MQTT_PORT
 #define MQTT_PORT 8883                            ///< Puerto seguro (TLS)
@@ -60,10 +60,10 @@
 
 // Variables de configuración de la red WiFi
 #ifndef WIFI_SSID
-#define WIFI_SSID "univalle"                     ///< Cambia por el nombre de tu red WiFi
+#define WIFI_SSID "wifi"                     ///< Cambia por el nombre de tu red WiFi
 #endif
 #ifndef WIFI_PASSWORD
-#define WIFI_PASSWORD "Univalle"                       ///< Cambia por la contraseña de tu red WiFi
+#define WIFI_PASSWORD "password"                       ///< Cambia por la contraseña de tu red WiFi
 #endif
 
 // Alias para compatibilidad con el código existente
