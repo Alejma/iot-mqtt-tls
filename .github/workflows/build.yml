@@ -52,13 +52,16 @@ jobs:
         path: .pio/build/esp32dev/firmware.bin
     
     - name: Upload to S3 (if secrets available)
-      if: ${{ secrets.S3_BUCKET_NAME != '' }}
+      if: secrets.S3_BUCKET_NAME != ''
       env:
         S3_BUCKET_NAME: ${{ secrets.S3_BUCKET_NAME }}
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        AWS_REGION: ${{ secrets.AWS_REGION || 'us-east-1' }}
+        AWS_REGION: ${{ secrets.AWS_REGION }}
       run: |
+        # Set default AWS region if not provided
+        export AWS_DEFAULT_REGION=${AWS_REGION:-us-east-1}
+        
         # Generate firmware name with timestamp
         FIRMWARE_NAME="firmware-$(date +%Y%m%d-%H%M%S).bin"
         
