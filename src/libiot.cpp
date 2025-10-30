@@ -116,7 +116,8 @@ void reconnect() {
  * Función setupIoT que configura el certificado raíz, el servidor MQTT y el puerto
  */
 void setupIoT() {
-  Wire.begin();                 //Inicializa el bus I2C
+  Wire.setPins(8, 9);
+  Wire.begin();                 //Inicializa el bus I2C: (SDA, SCL)
   espClient.setCACert(root_ca); //Configura el certificado raíz de la autoridad de certificación
   client.setServer(mqtt_server, mqtt_port);   //Configura el servidor MQTT y el puerto seguro
   client.setCallback(receivedCallback);       //Configura la función que se ejecutará cuando lleguen mensajes a la suscripción
