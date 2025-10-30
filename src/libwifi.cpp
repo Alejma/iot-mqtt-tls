@@ -2,6 +2,8 @@
 #include <WiFi.h>
 #include <libwifi.h>
 #include <libdisplay.h>
+#include <libstorage.h>
+#include <Arduino.h>
 
 
 /**
@@ -80,7 +82,14 @@ void startWiFi(const char* hostname) {
     WiFi.setHostname(hostname);
   }
   
-  WiFi.begin(ssid, password);
+  String s, p;
+  if (loadWiFiCredentials(s, p)) {
+    Serial.println("Using stored WiFi credentials from NVS");
+    WiFi.begin(s.c_str(), p.c_str());
+  } else {
+    Serial.println("Using built-in WiFi credentials (secrets.cpp)");
+    WiFi.begin(ssid, password);
+  }
   
   // Wait for connection
   int attempts = 0;
@@ -97,4 +106,24 @@ void startWiFi(const char* hostname) {
   } else {
     Serial.println("\nWiFi connection failed");
   }
+}
+
+bool hasStoredWiFi() {
+  return hasWiFiCredentials();
+}
+
+bool saveWiFi(const String &s, const String &pwd) {
+  return saveWiFiCredentials(s, pwd);
+}
+
+bool clearStoredWiFi() {
+  return clearWiFiCredentials();
+}
+
+void factoryReset() {
+  Serial.println("Factory reset: clearing WiFi credentials and restarting...");
+  clearWiFiCredentials();
+  WiFi.disconnect(true, true);
+  delay(500);
+  ESP.restart();
 }
